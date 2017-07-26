@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_overview"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="Overview"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_configure"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_delete"
+        android:title="Configure"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_other"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:title="Other"
+        app:showAsAction="ifRoom" />
+</menu>
