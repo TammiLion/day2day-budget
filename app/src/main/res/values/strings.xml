@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Day 2 Day Budget</string>
+
+    <!-- Configure screen -->
+    <string name="create_budget_label">Enter a total amount of money to create a new budget</string>
+    <string name="create_budget_hint">Amount</string>
+
+    <!-- Acknowledgements, credits et cetera -->
+    <string name="flaticon_budget_icons">Icons made by Freepik from www.flaticon.com </string>
+    <string name="flaticon_author_link">http://www.freepik.com</string>
 </resources>
