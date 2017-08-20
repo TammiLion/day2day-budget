@@ -40,4 +40,21 @@
         tools:layout_editor_absoluteX="186dp"
         tools:layout_editor_absoluteY="207dp" />
 
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:minHeight="@dimen/activity_margin"
+        android:progress="45"
+        android:progressBackgroundTint="#048F46"
+        android:progressTint="#3DDB86"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
