@@ -2,10 +2,17 @@
     <string name="app_name">Day 2 Day Budget</string>
 
     <!-- Configure screen -->
-    <string name="create_budget_label">Enter a total amount of money to create a new budget</string>
-    <string name="create_budget_hint">Amount</string>
+    <string name="create_budget_amount_explanation">The total amount of money in this budget</string>
+    <string name="create_budget_amount_hint">Amount</string>
 
     <!-- Acknowledgements, credits et cetera -->
     <string name="flaticon_budget_icons">Icons made by Freepik from www.flaticon.com </string>
     <string name="flaticon_author_link">http://www.freepik.com</string>
+    <string name="create_budget_name_explanation">A name that you can recognize this budget by</string>
+    <string name="create_budget_name_hint">Name</string>
+    <string name="create_budget_days_repeat_explanation">The amount of days that you are on this budget and if you would like to repeat it</string>
+    <string name="create_budget_repeat_hint">Repeat</string>
+    <string name="create_budget_days_hint">Days</string>
+    <string name="spent_label">Spent:</string>
+    <string name="amount_label">Amount:</string>
 </resources>

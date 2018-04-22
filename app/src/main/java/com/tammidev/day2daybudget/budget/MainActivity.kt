@@ -1,8 +1,12 @@
-package com.tammidev.day2daybudget
+package com.tammidev.day2daybudget.budget
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.tammidev.day2daybudget.R
+import com.tammidev.day2daybudget.budget.configure.ConfigureFragment
+import com.tammidev.day2daybudget.budget.other.OtherFragment
+import com.tammidev.day2daybudget.budget.overview.OverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
