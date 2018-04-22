@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 
 @Module
-class AppDatabaseModule() {
+class AppDatabaseModule {
 
     @Provides
     @Singleton
