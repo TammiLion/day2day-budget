@@ -1,6 +1,5 @@
 package com.tammidev.day2daybudget.budget.configure
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.tammidev.day2daybudget.budget.Budget
 import com.tammidev.day2daybudget.budget.BudgetRepo
@@ -11,7 +10,6 @@ import javax.inject.Inject
  * Created by troep on 8/27/17.
  */
 class ConfigureViewModel @Inject constructor(private val budgetRepo: BudgetRepo) : ViewModel() {
-    val budgets: LiveData<List<Budget>> = budgetRepo.getAll()
     private var budgetInEditing: Budget = Budget()
 
     fun amountChanged(enteredTotalAmount: String) {

@@ -1,6 +1,5 @@
 package com.tammidev.day2daybudget.budget.configure
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
@@ -18,7 +17,6 @@ import com.tammidev.day2daybudget.budget.BudgetViewModelFactory
 import com.tammidev.day2daybudget.extensions.closeKeyboard
 import com.tammidev.day2daybudget.extensions.inflate
 import kotlinx.android.synthetic.main.fragment_configure.*
-import timber.log.Timber
 import javax.inject.Inject
 
 class ConfigureFragment : Fragment() {
@@ -95,14 +93,11 @@ class ConfigureFragment : Fragment() {
 
     private fun resetUI() {
         closeKeyboard()
-        Toast.makeText(context, "Your new budget " + nameEditText.text.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Your new budget " + nameEditText.text.toString() + " is saved!", Toast.LENGTH_SHORT).show()
         nameEditText.setText("")
         if (repeatSwitch.isChecked) repeatSwitch.toggle()
     }
 
     private fun startObservingViewModel() {
-        viewModel.budgets.observe(this, Observer {
-            Timber.d("test:" + it.toString())
-        })
     }
 }

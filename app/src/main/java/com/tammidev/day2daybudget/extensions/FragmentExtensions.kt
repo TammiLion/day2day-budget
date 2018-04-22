@@ -10,6 +10,6 @@ import android.view.inputmethod.InputMethodManager
  */
 
 fun Fragment.closeKeyboard() {
-    val inputManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputManager.toggleSoftInput(0, 0)
+    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view?.windowToken, 0)
 }

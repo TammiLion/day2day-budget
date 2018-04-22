@@ -15,4 +15,5 @@
     <string name="create_budget_days_hint">Days</string>
     <string name="spent_label">Spent:</string>
     <string name="amount_label">Amount:</string>
+    <string name="action_save">Save</string>
 </resources>

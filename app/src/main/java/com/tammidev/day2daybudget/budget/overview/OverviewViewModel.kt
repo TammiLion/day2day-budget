@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.tammidev.day2daybudget.budget.Budget
 import com.tammidev.day2daybudget.budget.BudgetRepo
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -13,4 +14,11 @@ class OverviewViewModel @Inject constructor(budgetRepo: BudgetRepo) : ViewModel(
 
     val budgets: LiveData<List<Budget>> = budgetRepo.getAll()
 
+    fun clicked(position: Int) {
+        Timber.d("clicked: " + budgets.value?.get(position).toString())
+    }
+
+    fun longClicked(position: Int) {
+        Timber.d("longClicked: " + budgets.value?.get(position).toString())
+    }
 }

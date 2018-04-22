@@ -11,7 +11,6 @@ class AppStartup @Inject constructor(val app: D2dApp) {
     }
 
     fun startMeUp() {
-        Timber.d("starting up app")
         JodaTimeAndroid.init(app);
         setupTimber()
     }

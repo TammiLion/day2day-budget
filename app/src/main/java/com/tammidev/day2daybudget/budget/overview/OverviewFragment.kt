@@ -1,11 +1,13 @@
 package com.tammidev.day2daybudget.budget.overview
 
+import ItemClickSupport
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +51,18 @@ class OverviewFragment : Fragment() {
     }
 
     private fun startObservingUI() {
+        ItemClickSupport.addTo(recyclerView)
+                .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+                    override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                        viewModel.clicked(position)
+                    }
+                })
+                .setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
+                    override fun onItemLongClicked(recyclerView: RecyclerView, position: Int, v: View): Boolean {
+                        viewModel.longClicked(position)
+                        return true
+                    }
+                })
     }
 
     private fun startObservingViewModel() {
