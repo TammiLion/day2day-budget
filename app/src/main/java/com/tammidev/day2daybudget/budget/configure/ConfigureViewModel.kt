@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Created by troep on 8/27/17.
  */
 class ConfigureViewModel @Inject constructor(private val budgetRepo: BudgetRepo) : ViewModel() {
-    private var budgetInEditing: Budget = Budget()
+    internal var budgetInEditing: Budget = Budget()
 
     fun amountChanged(enteredTotalAmount: String) {
         val amount = enteredTotalAmount.toDoubleOrNull()

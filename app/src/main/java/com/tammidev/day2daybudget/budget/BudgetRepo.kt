@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
+open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
     val budgetDao: BudgetDao = appDatabase.budgetDao()
 
     fun save(budget: Budget) {
