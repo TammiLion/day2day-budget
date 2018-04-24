@@ -37,10 +37,10 @@ class BudgetAdapter(var budgets: List<Budget>) : RecyclerView.Adapter<BudgetAdap
             LayoutContainer {
         fun bind(budget: Budget) {
             name.text = budget.name
-            amount.text = budget.totalAmount.toString()
-            spent.text = budget.amountSpent.toString()
+            amount.text = "%.2f".format(budget.totalAmount)
+            spent.text = "%.2f".format(budget.amountSpent)
             val days: Double = (DateTime(budget.endDate - DateTime.now().millis).millis / DateTimeConstants.MILLIS_PER_DAY).toDouble()
-            daysLeft.text = days.toString()
+            daysLeft.text = "%.0f".format(days)
             val allowance: String = "%.2f".format(((budget.totalAmount - budget.amountSpent) / days))
             Timber.d("calc: " + allowance)
             allowanceToday.text = allowance
