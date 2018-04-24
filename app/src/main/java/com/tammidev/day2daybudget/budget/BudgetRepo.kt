@@ -13,7 +13,7 @@ import javax.inject.Singleton
 open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
     val budgetDao: BudgetDao = appDatabase.budgetDao()
 
-    fun save(budget: Budget) {
+    open fun save(budget: Budget) {
         Single.fromCallable({ budgetDao.insert(budget) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
