@@ -16,4 +16,6 @@
     <string name="spent_label">Spent:</string>
     <string name="amount_label">Amount:</string>
     <string name="action_save">Save</string>
+    <string name="days_left_label">Days left:</string>
+    <string name="amount_to_spend_per_day_label">Per day you can spend:</string>
 </resources>

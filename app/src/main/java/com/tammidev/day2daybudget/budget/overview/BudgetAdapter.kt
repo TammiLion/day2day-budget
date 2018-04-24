@@ -8,6 +8,9 @@ import com.tammidev.day2daybudget.R
 import com.tammidev.day2daybudget.budget.Budget
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_budget.*
+import org.joda.time.DateTime
+import org.joda.time.DateTimeConstants
+import timber.log.Timber
 
 class BudgetAdapter(var budgets: List<Budget>) : RecyclerView.Adapter<BudgetAdapter.BudgetVH>() {
 
@@ -36,6 +39,11 @@ class BudgetAdapter(var budgets: List<Budget>) : RecyclerView.Adapter<BudgetAdap
             name.text = budget.name
             amount.text = budget.totalAmount.toString()
             spent.text = budget.amountSpent.toString()
+            val days: Double = (DateTime(budget.endDate - DateTime.now().millis).millis / DateTimeConstants.MILLIS_PER_DAY).toDouble()
+            daysLeft.text = days.toString()
+            val allowance: String = "%.2f".format(((budget.totalAmount - budget.amountSpent) / days))
+            Timber.d("calc: " + allowance)
+            allowanceToday.text = allowance
             progressBar.progress = if (budget.amountSpent > 0) (budget.totalAmount / budget.amountSpent).toInt() else 0
         }
     }
