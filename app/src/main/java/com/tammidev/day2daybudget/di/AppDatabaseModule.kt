@@ -1,6 +1,8 @@
 package com.tammidev.day2daybudget.di
 
+import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
+import android.arch.persistence.room.migration.Migration
 import com.tammidev.day2daybudget.app.AppDatabase
 import com.tammidev.day2daybudget.app.Constants
 import com.tammidev.day2daybudget.app.D2dApp
@@ -15,6 +17,14 @@ class AppDatabaseModule {
     @Provides
     @Singleton
     fun provideAppDatabase(app: D2dApp): AppDatabase {
-        return Room.databaseBuilder(app, AppDatabase::class.java, Constants.DATABASE_NAME).build();
+        return Room.databaseBuilder(app, AppDatabase::class.java, Constants.DATABASE_NAME)
+                .addMigrations(MIGRATION_1_2)
+                .build()
+    }
+}
+
+val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE budget " + " ADD COLUMN expenses TEXT NOT NULL DEFAULT []")
     }
 }

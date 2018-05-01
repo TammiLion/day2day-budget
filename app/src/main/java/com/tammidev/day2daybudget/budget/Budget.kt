@@ -16,7 +16,8 @@ data class Budget(var name: String = "New Budget",
                   @ColumnInfo(name = "total_amount") var totalAmount: Double = 0.0,
                   @ColumnInfo(name = "end_date") var endDate: Long = DateTime.now().plusDays(DEFAULT_BUDGET_DURATION).millis,
                   var repeat: Boolean = false,
-                  @ColumnInfo(name = "amount_spent") var amountSpent: Double = 0.0) {
+                  @ColumnInfo(name = "amount_spent") var amountSpent: Double = 0.0,
+                  var expenses: List<Expense> = ArrayList()) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
