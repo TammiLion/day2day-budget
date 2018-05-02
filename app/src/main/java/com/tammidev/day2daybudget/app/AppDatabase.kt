@@ -8,7 +8,7 @@ import com.tammidev.day2daybudget.budget.BudgetDao
 import com.tammidev.day2daybudget.budget.ExpenseListConverter
 import com.tammidev.day2daybudget.budget.StringListConverter
 
-@Database(entities = [(Budget::class)], version = 2)
+@Database(entities = [(Budget::class)], version = 3)
 @TypeConverters(ExpenseListConverter::class, StringListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun budgetDao(): BudgetDao
