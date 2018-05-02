@@ -1,21 +1,29 @@
 <resources>
     <string name="app_name">Day 2 Day Budget</string>
 
+    <!-- shared -->
+    <string name="amount_hint">Amount</string>
+
     <!-- Configure screen -->
     <string name="create_budget_amount_explanation">The total amount of money in this budget</string>
-    <string name="create_budget_amount_hint">Amount</string>
-
-    <!-- Acknowledgements, credits et cetera -->
-    <string name="flaticon_budget_icons">Icons made by Freepik from www.flaticon.com </string>
-    <string name="flaticon_author_link">http://www.freepik.com</string>
     <string name="create_budget_name_explanation">A name that you can recognize this budget by</string>
     <string name="create_budget_name_hint">Name</string>
     <string name="create_budget_days_repeat_explanation">The amount of days that you are on this budget and if you would like to repeat it</string>
     <string name="create_budget_repeat_hint">Repeat</string>
     <string name="create_budget_days_hint">Days</string>
+    <string name="action_save">Save</string>
+
+    <!-- Acknowledgements, credits et cetera -->
+    <string name="flaticon_budget_icons">Icons made by Freepik from www.flaticon.com </string>
+    <string name="flaticon_author_link">http://www.freepik.com</string>
+
+    <!-- overview screen -->
     <string name="spent_label">Spent:</string>
     <string name="amount_label">Amount:</string>
-    <string name="action_save">Save</string>
     <string name="days_left_label">Days left:</string>
     <string name="amount_to_spend_per_day_label">Per day you can spend:</string>
+
+    <!-- add expense dialog -->
+    <string name="add_expense_tag_hint">Tag</string>
+    <string name="add_expense_tag_explanation">You can add as many tags was you want</string>
 </resources>

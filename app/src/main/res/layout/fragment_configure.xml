@@ -74,7 +74,7 @@
                     android:layout_marginStart="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:background="@color/transparent"
-                    android:hint="@string/create_budget_amount_hint"
+                    android:hint="@string/amount_hint"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>

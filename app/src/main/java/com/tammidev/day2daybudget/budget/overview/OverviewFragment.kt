@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_overview.*
 import javax.inject.Inject
 
 const val SPAN_COUNT = 2
+private const val ADD_EXPENSE_DIALOG_TAG = "add_expense_dialog"
 
 class OverviewFragment : Fragment() {
 
@@ -55,6 +57,7 @@ class OverviewFragment : Fragment() {
                 .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
                     override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                         viewModel.clicked(position)
+                        showExpenseDialog(position)
                     }
                 })
                 .setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
@@ -63,6 +66,18 @@ class OverviewFragment : Fragment() {
                         return true
                     }
                 })
+    }
+
+    private fun showExpenseDialog(budgetId: Int) {
+        val ft: FragmentTransaction? = fragmentManager?.beginTransaction();
+        val prev: Fragment? = fragmentManager?.findFragmentByTag(ADD_EXPENSE_DIALOG_TAG)
+        ft?.apply {
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+            AddExpenseDialog().show(ft, ADD_EXPENSE_DIALOG_TAG);
+        }
     }
 
     private fun startObservingViewModel() {
