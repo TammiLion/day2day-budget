@@ -55,7 +55,6 @@ class AddExpenseDialog : DialogFragment() {
         tagsRecyclerView.adapter = adapter
 
         tagsEditText.setOnEditorActionListener({ _, actionId, _ ->
-            Log.d("Debug", "le action" + actionId + " " + EditorInfo.IME_ACTION_UNSPECIFIED)
             if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 val value = tagsEditText.text.toString()
                 if (value.isNotEmpty()) {
@@ -81,24 +80,28 @@ class AddExpenseDialog : DialogFragment() {
 
         saveBtn.setOnClickListener {
             if (amount > 0.00) {
-                val id = arguments!!.getInt(EXTRA_BUDGET_ID)
-                val livedata = budgetRepo.get(id)
-                livedata.observe(this, Observer {
-                    if (it?.isNotEmpty() == true) {
-                        if (it.size > 1) {
-                            Log.w("AddExpenseDialog", "Repo retrieved more than one budget for a budgetId.")
-                        }
-                        val budget = it[0]
-                        budget.expenses.add(Expense(cost = amount, tags = tags))
-                        budget.amountSpent += amount
-                        livedata.removeObservers(this)
-                        budgetRepo.update(budget)
-                        this.dismiss()
-                    }
-                })
+                saveExpense()
             } else {
                 Toast.makeText(context, "Amount needs to be greater than 0", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun saveExpense() {
+        val id = arguments!!.getInt(EXTRA_BUDGET_ID)
+        val livedata = budgetRepo.get(id)
+        livedata.observe(this, Observer {
+            if (it?.isNotEmpty() == true) {
+                if (it.size > 1) {
+                    Log.w("AddExpenseDialog", "Repo retrieved more than one budget for a budgetId.")
+                }
+                val budget = it[0]
+                budget.expenses.add(Expense(cost = amount, tags = tags))
+                budget.amountSpent += amount
+                livedata.removeObservers(this)
+                budgetRepo.update(budget)
+                this.dismiss()
+            }
+        })
     }
 }
