@@ -100,6 +100,5 @@ class AddExpenseDialog : DialogFragment() {
                 Toast.makeText(context, "Amount needs to be greater than 0", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 }
