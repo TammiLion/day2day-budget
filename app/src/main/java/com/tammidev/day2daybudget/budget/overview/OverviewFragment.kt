@@ -56,8 +56,10 @@ class OverviewFragment : Fragment() {
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
                     override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-                        viewModel.clicked(position)
-                        showExpenseDialog(position)
+                        val budgetId = viewModel.getBudgetId(position)
+                        if (budgetId != null) {
+                            showExpenseDialog(budgetId)
+                        }
                     }
                 })
                 .setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
@@ -75,8 +77,8 @@ class OverviewFragment : Fragment() {
             if (prev != null) {
                 ft.remove(prev);
             }
-            ft.addToBackStack(null);
-            AddExpenseDialog().show(ft, ADD_EXPENSE_DIALOG_TAG);
+            ft.addToBackStack(null)
+            AddExpenseDialog.newInstance(budgetId).show(ft, ADD_EXPENSE_DIALOG_TAG);
         }
     }
 

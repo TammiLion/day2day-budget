@@ -21,4 +21,8 @@ class OverviewViewModel @Inject constructor(budgetRepo: BudgetRepo) : ViewModel(
     fun longClicked(position: Int) {
         Timber.d("longClicked: " + budgets.value?.get(position).toString())
     }
+
+    fun getBudgetId(position: Int): Int? {
+        return budgets.value?.get(position)?.id
+    }
 }

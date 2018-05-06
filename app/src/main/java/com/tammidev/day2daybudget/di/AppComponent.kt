@@ -2,6 +2,7 @@ package com.tammidev.day2daybudget.di
 
 import com.tammidev.day2daybudget.app.D2dApp
 import com.tammidev.day2daybudget.budget.configure.ConfigureFragment
+import com.tammidev.day2daybudget.budget.overview.AddExpenseDialog
 import com.tammidev.day2daybudget.budget.overview.OverviewFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -15,4 +16,5 @@ interface AppComponent {
     fun inject(app: D2dApp)
     fun inject(app: OverviewFragment)
     fun inject(app: ConfigureFragment)
+    fun inject(addExpenseDialog: AddExpenseDialog)
 }

@@ -7,6 +7,9 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 @Dao
 interface BudgetDao {
 
+    @Query("SELECT * from budget WHERE id=:id")
+    fun get(id: Int): LiveData<List<Budget>>
+
     @Query("SELECT * from budget")
     fun getAll(): LiveData<List<Budget>>
 

@@ -11,7 +11,12 @@ import javax.inject.Singleton
 
 @Singleton
 open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
-    val budgetDao: BudgetDao = appDatabase.budgetDao()
+    protected val budgetDao: BudgetDao = appDatabase.budgetDao()
+
+    fun get(id: Int): LiveData<List<Budget>> {
+        return budgetDao.get(id)
+    }
+
 
     open fun save(budget: Budget) {
         Single.fromCallable({ budgetDao.insert(budget) })

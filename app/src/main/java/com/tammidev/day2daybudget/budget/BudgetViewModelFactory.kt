@@ -7,6 +7,7 @@ import com.tammidev.day2daybudget.budget.overview.OverviewViewModel
 import javax.inject.Inject
 
 
+@Suppress("UNCHECKED_CAST")
 class BudgetViewModelFactory @Inject constructor(private val budgetRepo: BudgetRepo) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
