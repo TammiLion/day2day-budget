@@ -13,7 +13,7 @@ import javax.inject.Singleton
 open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
     protected val budgetDao: BudgetDao = appDatabase.budgetDao()
 
-    fun get(id: Int): LiveData<List<Budget>> {
+    open fun get(id: Int): LiveData<List<Budget>> {
         return budgetDao.get(id)
     }
 
@@ -25,25 +25,25 @@ open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
                 .subscribe()
     }
 
-    fun delete(vararg budget: Budget) {
+    open fun delete(vararg budget: Budget) {
         Single.fromCallable({ budgetDao.delete(*budget) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
     }
 
-    fun update(budget: Budget) {
+    open fun update(budget: Budget) {
         Single.fromCallable({ budgetDao.update(budget) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
     }
 
-    fun getAll(): LiveData<List<Budget>> {
+    open fun getAll(): LiveData<List<Budget>> {
         return budgetDao.getAll()
     }
 
-    fun deleteBudgetsPast(date: DateTime) {
+    open fun deleteBudgetsPast(date: DateTime) {
         Single.fromCallable({
             val budgets: List<Budget> = budgetDao.getBudgetsPastDate(date.millis)
             budgetDao.delete(*budgets.toTypedArray())
