@@ -38,6 +38,11 @@ android {
     }
 }
 
+android.applicationVariants.all {
+    def kaptOutputDir = new File(buildDir, "generated/source/kapt/${it.unitTestVariant.dirName}")
+    it.unitTestVariant.addJavaSourceFoldersToModel(kaptOutputDir)
+}
+
 ext {
     supportLibraryVersion = '27.1.1'
     daggerVersion = '2.11'
@@ -60,7 +65,7 @@ dependencies {
     implementation "com.google.dagger:dagger:${daggerVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
     kaptAndroidTest "com.google.dagger:dagger-compiler:${daggerVersion}"
-    testImplementation "com.google.dagger:dagger-compiler:${daggerVersion}"
+    kaptTest "com.google.dagger:dagger-compiler:${daggerVersion}"
 
     //support library
     implementation "com.android.support:design:${supportLibraryVersion}"
@@ -99,12 +104,16 @@ dependencies {
 
     //auto-generated
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.0', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:3.0.0', {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
     })
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
     testImplementation 'junit:junit:4.12'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }
 

@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AppStartupModule {
+open class AppStartupModule {
 
     @Provides
-    fun provideAppStartup(app: D2dApp): AppStartup = AppStartup(app)
+    open fun provideAppStartup(app: D2dApp): AppStartup = AppStartup(app)
 }

@@ -13,11 +13,11 @@ import javax.inject.Singleton
 
 
 @Module
-class AppDatabaseModule {
+open class AppDatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(app: D2dApp): AppDatabase {
+    open fun provideAppDatabase(app: D2dApp): AppDatabase {
         return Room.databaseBuilder(app, AppDatabase::class.java, Constants.DATABASE_NAME)
                 .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()

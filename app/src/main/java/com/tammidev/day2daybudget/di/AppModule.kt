@@ -9,11 +9,11 @@ import javax.inject.Singleton
  * Created by troep on 9/24/17.
  */
 @Module
-class AppModule(val app: D2dApp) {
+open class AppModule(val app: D2dApp) {
 
     @Provides
     @Singleton
-    fun provideApp(): D2dApp {
+    open fun provideApp(): D2dApp {
         return app
     }
 }
