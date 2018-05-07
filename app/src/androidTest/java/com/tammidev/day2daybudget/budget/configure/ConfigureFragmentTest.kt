@@ -31,6 +31,7 @@ class ConfigureFragmentTest {
     @Rule
     @JvmField
     val activityRule = ActivityTestRule(MainActivity::class.java, true, false)
+    //I saw someone extending TestRule that injected the Application with a dagger Test component, seems cool!
 
     @Before
     fun before() {

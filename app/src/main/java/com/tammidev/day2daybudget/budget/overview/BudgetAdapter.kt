@@ -41,7 +41,7 @@ class BudgetAdapter(var budgets: List<Budget>) : RecyclerView.Adapter<BudgetAdap
             spent.text = "%.2f".format(budget.amountSpent)
             val days: Double = (DateTime(budget.endDate - DateTime.now().millis).millis / DateTimeConstants.MILLIS_PER_DAY).toDouble()
             daysLeft.text = "%.0f".format(days)
-            val allowance: String = "%.2f".format(((budget.totalAmount - budget.amountSpent) / days))
+            val allowance: String = "%.2f".format(((budget.totalAmount - budget.amountSpent) / (if (days <= 0) 1.0 else days)))
             Timber.d("calc: " + allowance)
             allowanceToday.text = allowance
             progressBar.progress = if (budget.amountSpent > 0) (budget.totalAmount / budget.amountSpent).toInt() else 0
