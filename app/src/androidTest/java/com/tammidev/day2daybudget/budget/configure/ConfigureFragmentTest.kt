@@ -54,6 +54,7 @@ class ConfigureFragmentTest {
 
         onView(withId(R.id.action_overview)).perform(click())
         onView(withText("blah")).check(matches(isDisplayed()))
+        onView(withText("20.00")).check(matches(isDisplayed()))
     }
 }
 
