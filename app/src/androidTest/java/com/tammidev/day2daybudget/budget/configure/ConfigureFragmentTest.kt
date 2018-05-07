@@ -26,7 +26,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import javax.inject.Singleton
 
-
 @RunWith(AndroidJUnit4::class)
 class ConfigureFragmentTest {
     @Rule
@@ -37,7 +36,7 @@ class ConfigureFragmentTest {
     fun before() {
         val context = InstrumentationRegistry.getTargetContext()
         val app = context.applicationContext as D2dApp
-        val component = DaggerTestComponent.builder().appModule(AppModule(app)).build()
+        val component = DaggerTestComponent.builder().appModule(AppModule(app)).build() //if this isn't working, rebuild and run compileDebugAndroidTestKotlin
         app.setComponentAndInjectApp(component)
         activityRule.launchActivity(null)
         onView(withId(R.id.action_configure)).perform(click())
