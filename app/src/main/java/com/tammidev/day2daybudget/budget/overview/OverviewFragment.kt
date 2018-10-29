@@ -1,6 +1,7 @@
 package com.tammidev.day2daybudget.budget.overview
 
 import ItemClickSupport
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -14,20 +15,22 @@ import android.view.View
 import android.view.ViewGroup
 import com.tammidev.day2daybudget.R
 import com.tammidev.day2daybudget.app.D2dApp
-import com.tammidev.day2daybudget.budget.Budget
 import com.tammidev.day2daybudget.budget.BudgetViewModelFactory
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_overview.*
 import javax.inject.Inject
 
-const val SPAN_COUNT = 2
+const val SPAN_COUNT = 1
 private const val ADD_EXPENSE_DIALOG_TAG = "add_expense_dialog"
 
 class OverviewFragment : Fragment() {
 
-    private val adapter: BudgetAdapter = BudgetAdapter(ArrayList<Budget>())
+    private val editEvents = PublishSubject.create<Int>()
+    private val deleteEvents = PublishSubject.create<Int>()
+    private val adapter: BudgetAdapter = BudgetAdapter(listOf(), editEvents, deleteEvents)
 
     companion object {
-        private val SOME_KEY = "some_key";
+        private val SOME_KEY = "some_key"
     }
 
     @Inject
@@ -50,6 +53,12 @@ class OverviewFragment : Fragment() {
         setupUI()
         startObservingViewModel()
         startObservingUI()
+        startObservingAdapterEvents()
+    }
+
+    private fun startObservingAdapterEvents() {
+        editEvents.subscribe { viewModel.requestToEdit(it) }
+        deleteEvents.subscribe { showDeleteConfirmationDialog(it) }
     }
 
     private fun startObservingUI() {
@@ -71,15 +80,27 @@ class OverviewFragment : Fragment() {
     }
 
     private fun showExpenseDialog(budgetId: Int) {
-        val ft: FragmentTransaction? = fragmentManager?.beginTransaction();
+        val ft: FragmentTransaction? = fragmentManager?.beginTransaction()
         val prev: Fragment? = fragmentManager?.findFragmentByTag(ADD_EXPENSE_DIALOG_TAG)
         ft?.apply {
             if (prev != null) {
-                ft.remove(prev);
+                ft.remove(prev)
             }
             ft.addToBackStack(null)
-            AddExpenseDialog.newInstance(budgetId).show(ft, ADD_EXPENSE_DIALOG_TAG);
+            AddExpenseDialog.newInstance(budgetId).show(ft, ADD_EXPENSE_DIALOG_TAG)
         }
+    }
+
+    private fun showDeleteConfirmationDialog(id: Int) {
+        AlertDialog.Builder(context)
+                .setTitle("Delete budget")
+                .setMessage("Are you sure you want to delete this budget?")
+                .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                    viewModel.requestToDelete(id)
+                    dialog.dismiss()
+                }
+                .show()
     }
 
     private fun startObservingViewModel() {

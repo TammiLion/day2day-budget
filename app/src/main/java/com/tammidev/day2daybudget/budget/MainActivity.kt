@@ -22,10 +22,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main)
 
         setupBottomNavigationMenu()
-        setupView()
+        if (savedInstanceState == null) {
+            setupView()
+        }
     }
 
     private fun setupView() {

@@ -11,9 +11,9 @@ import javax.inject.Inject
 class BudgetViewModelFactory @Inject constructor(private val budgetRepo: BudgetRepo) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        when {
-            modelClass.isAssignableFrom(OverviewViewModel::class.java) -> return OverviewViewModel(budgetRepo) as T
-            modelClass.isAssignableFrom(ConfigureViewModel::class.java) -> return ConfigureViewModel(budgetRepo) as T
+        return when {
+            modelClass.isAssignableFrom(OverviewViewModel::class.java) -> OverviewViewModel(budgetRepo) as T
+            modelClass.isAssignableFrom(ConfigureViewModel::class.java) -> ConfigureViewModel(budgetRepo) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

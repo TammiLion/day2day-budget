@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.tammidev.day2daybudget"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -23,7 +23,7 @@ android {
     }
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
@@ -73,11 +73,15 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
 
     //android architecture components
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    kapt "android.arch.persistence.room:compiler:1.0.0"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$archLifecycleVersion"
     testImplementation "android.arch.core:core-testing:$archLifecycleVersion"
+
+    //coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.26.1-eap13'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.26.1-eap13"
 
     //joda-time (date library)
     implementation 'net.danlew:android.joda:2.9.9'
@@ -94,6 +98,9 @@ dependencies {
     //saveinstancestate annotations
     implementation 'com.evernote:android-state:1.2.1'
     kapt 'com.evernote:android-state-processor:1.2.1'
+
+    //debugging facebook stetho
+    implementation 'com.facebook.stetho:stetho:1.5.0'
 
     //test
     testImplementation 'org.mockito:mockito-core:2.8.47'
@@ -114,7 +121,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
     testImplementation 'junit:junit:4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
 
 //apply plugin: 'com.google.gms.google-services'

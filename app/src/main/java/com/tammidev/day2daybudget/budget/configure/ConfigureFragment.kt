@@ -72,23 +72,23 @@ class ConfigureFragment : Fragment() {
             }
         })
 
-        amountEditText.setOnEditorActionListener({ _, actionId, _ ->
+        amountEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 closeKeyboard()
                 true
             } else {
                 false
             }
-        })
+        }
 
         repeatSwitch.setOnCheckedChangeListener { _, isChecked -> viewModel.repeatSwitchToggled(isChecked) }
 
-        daysPicker.setValueChangedListener({ _, _ -> viewModel.daysPicked(daysPicker.value) })
+        daysPicker.setValueChangedListener { _, _ -> viewModel.daysPicked(daysPicker.value) }
 
-        saveBtn.setOnClickListener({
+        saveBtn.setOnClickListener {
             viewModel.save()
             resetUI()
-        })
+        }
     }
 
     private fun resetUI() {

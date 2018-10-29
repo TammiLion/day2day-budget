@@ -11,29 +11,28 @@ import javax.inject.Singleton
 
 @Singleton
 open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
-    protected val budgetDao: BudgetDao = appDatabase.budgetDao()
+    private val budgetDao: BudgetDao = appDatabase.budgetDao()
 
     open fun get(id: Int): LiveData<List<Budget>> {
         return budgetDao.get(id)
     }
 
-
     open fun save(budget: Budget) {
-        Single.fromCallable({ budgetDao.insert(budget) })
+        Single.fromCallable { budgetDao.insert(budget) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
     }
 
     open fun delete(vararg budget: Budget) {
-        Single.fromCallable({ budgetDao.delete(*budget) })
+        Single.fromCallable { budgetDao.delete(*budget) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
     }
 
     open fun update(budget: Budget) {
-        Single.fromCallable({ budgetDao.update(budget) })
+        Single.fromCallable { budgetDao.update(budget) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
@@ -43,14 +42,20 @@ open class BudgetRepo @Inject constructor(appDatabase: AppDatabase) {
         return budgetDao.getAll()
     }
 
-    open fun deleteBudgetsPast(date: DateTime) {
-        Single.fromCallable({
+    open fun deletePast(date: DateTime) {
+        Single.fromCallable {
             val budgets: List<Budget> = budgetDao.getBudgetsPastDate(date.millis)
             budgetDao.delete(*budgets.toTypedArray())
-        })
+        }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
     }
 
+    open fun delete(id: Int) {
+        Single.fromCallable { budgetDao.delete(id) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+    }
 }

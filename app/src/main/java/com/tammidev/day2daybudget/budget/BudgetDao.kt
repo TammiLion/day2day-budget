@@ -19,10 +19,12 @@ interface BudgetDao {
     @Update
     fun update(budget: Budget)
 
+    @Query("DELETE from budget WHERE id=:id")
+    fun delete(id: Int)
+
     @Delete
     fun delete(vararg budget: Budget)
 
     @Query("SELECT * FROM budget WHERE end_date > :date")
     fun getBudgetsPastDate(date: Long): List<Budget>
-
 }

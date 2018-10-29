@@ -16,20 +16,20 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class BudgetDatabaseTest {
-    private var mUserDao: BudgetDao? = null
-    private var mDb: AppDatabase? = null
+    lateinit var mUserDao: BudgetDao
+    lateinit var mDb: AppDatabase
 
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        mUserDao = mDb!!.budgetDao()
+        mUserDao = mDb.budgetDao()
     }
 
     @After
     @Throws(IOException::class)
     fun closeDb() {
-        mDb!!.close()
+        mDb.close()
     }
 
     @Test
@@ -37,11 +37,11 @@ class BudgetDatabaseTest {
     fun writeUserAndReadInList() {
         val budget = Budget("Test", 10.0, repeat = true)
         budget.id = 27
-        mUserDao!!.insert(budget)
-        val retrieved = mUserDao!!.get(27)
+        mUserDao.insert(budget)
+        val retrieved = mUserDao.get(27)
 
         val innerObserver: Observer<List<Budget>> = Observer {
-            if (it!!.size > 0) {
+            if (it!!.isNotEmpty()) {
                 assertThat(it[0].id, equalTo(27))
             }
         }

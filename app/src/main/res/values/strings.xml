@@ -22,6 +22,7 @@
     <string name="amount_label">Amount:</string>
     <string name="days_left_label">Days left:</string>
     <string name="amount_to_spend_per_day_label">Per day you can spend:</string>
+    <string name="amount_to_spend_today_label">Today you can spend:</string>
 
     <!-- add expense dialog -->
     <string name="add_expense_tag_hint">Tag</string>

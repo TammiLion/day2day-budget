@@ -10,9 +10,9 @@ import javax.inject.Inject
 /**
  * Created by troep on 8/27/17.
  */
-class OverviewViewModel @Inject constructor(budgetRepo: BudgetRepo) : ViewModel() {
+class OverviewViewModel @Inject constructor(val budgetRepo: BudgetRepo) : ViewModel() {
 
-    val budgets: LiveData<List<Budget>> = budgetRepo.getAll()
+    var budgets: LiveData<List<Budget>> = budgetRepo.getAll()
 
     fun clicked(position: Int) {
         Timber.d("clicked: " + budgets.value?.get(position).toString())
@@ -24,5 +24,13 @@ class OverviewViewModel @Inject constructor(budgetRepo: BudgetRepo) : ViewModel(
 
     fun getBudgetId(position: Int): Int? {
         return budgets.value?.get(position)?.id
+    }
+
+    fun requestToEdit(it: Int) {
+
+    }
+
+    fun requestToDelete(id: Int) {
+        budgetRepo.delete(id)
     }
 }

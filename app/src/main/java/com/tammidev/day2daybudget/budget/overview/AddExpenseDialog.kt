@@ -54,7 +54,7 @@ class AddExpenseDialog : DialogFragment() {
         tagsRecyclerView.layoutManager = layoutManager
         tagsRecyclerView.adapter = adapter
 
-        tagsEditText.setOnEditorActionListener({ _, actionId, _ ->
+        tagsEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 val value = tagsEditText.text.toString()
                 if (value.isNotEmpty()) {
@@ -66,7 +66,7 @@ class AddExpenseDialog : DialogFragment() {
             } else {
                 false
             }
-        })
+        }
 
         expenseEditText.addTextChangedListener(object : TextWatcherAdapter() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
