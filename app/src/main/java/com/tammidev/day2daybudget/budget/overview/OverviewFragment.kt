@@ -29,6 +29,7 @@ class OverviewFragment : Fragment() {
     private val deleteEvents = PublishSubject.create<Int>()
     private val adapter: BudgetAdapter = BudgetAdapter(listOf(), editEvents, deleteEvents)
     private val disposables: MutableList<Disposable> = mutableListOf()
+    private var dialog: AlertDialog? = null
 
     companion object {
         private val SOME_KEY = "some_key"
@@ -47,6 +48,7 @@ class OverviewFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        dialog?.dismiss()
         disposables.forEach {
             if (!it.isDisposed) {
                 it.dispose()
@@ -102,7 +104,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun showDeleteConfirmationDialog(id: Int) {
-        AlertDialog.Builder(context)
+        dialog = AlertDialog.Builder(context)
                 .setTitle("Delete budget")
                 .setMessage("Are you sure you want to delete this budget?")
                 .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.dismiss() }
