@@ -8,7 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +16,11 @@ import android.view.ViewGroup
 import com.tammidev.day2daybudget.R
 import com.tammidev.day2daybudget.app.D2dApp
 import com.tammidev.day2daybudget.budget.BudgetViewModelFactory
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_overview.*
 import javax.inject.Inject
 
-const val SPAN_COUNT = 1
 private const val ADD_EXPENSE_DIALOG_TAG = "add_expense_dialog"
 
 class OverviewFragment : Fragment() {
@@ -28,6 +28,7 @@ class OverviewFragment : Fragment() {
     private val editEvents = PublishSubject.create<Int>()
     private val deleteEvents = PublishSubject.create<Int>()
     private val adapter: BudgetAdapter = BudgetAdapter(listOf(), editEvents, deleteEvents)
+    private val disposables: MutableList<Disposable> = mutableListOf()
 
     companion object {
         private val SOME_KEY = "some_key"
@@ -45,6 +46,15 @@ class OverviewFragment : Fragment() {
         (context?.applicationContext as D2dApp).getComponent().inject(this)
     }
 
+    override fun onDestroyView() {
+        disposables.forEach {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
+        super.onDestroyView()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_overview, container, false)
 
@@ -57,8 +67,8 @@ class OverviewFragment : Fragment() {
     }
 
     private fun startObservingAdapterEvents() {
-        editEvents.subscribe { viewModel.requestToEdit(it) }
-        deleteEvents.subscribe { showDeleteConfirmationDialog(it) }
+        disposables.add(editEvents.subscribe { viewModel.requestToEdit(it) })
+        disposables.add(deleteEvents.subscribe { showDeleteConfirmationDialog(it) })
     }
 
     private fun startObservingUI() {
@@ -110,7 +120,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setupUI() {
-        recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 }
