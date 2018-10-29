@@ -48,12 +48,12 @@ class OverviewFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        dialog?.dismiss()
         disposables.forEach {
             if (!it.isDisposed) {
                 it.dispose()
             }
         }
+        dialog?.dismiss()
         super.onDestroyView()
     }
 
