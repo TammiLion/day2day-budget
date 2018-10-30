@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import com.tammidev.day2daybudget.R
 import com.tammidev.day2daybudget.app.D2dApp
 import com.tammidev.day2daybudget.budget.BudgetViewModelFactory
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_overview.*
@@ -29,6 +30,7 @@ class OverviewFragment : Fragment() {
     private val deleteEvents = PublishSubject.create<Int>()
     private val adapter: BudgetAdapter = BudgetAdapter(listOf(), editEvents, deleteEvents)
     private val disposables: MutableList<Disposable> = mutableListOf()
+    private val composite: CompositeDisposable = CompositeDisposable()
     private var dialog: AlertDialog? = null
 
     companion object {
@@ -48,11 +50,7 @@ class OverviewFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        disposables.forEach {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
+        composite.clear()
         dialog?.dismiss()
         super.onDestroyView()
     }
@@ -69,8 +67,8 @@ class OverviewFragment : Fragment() {
     }
 
     private fun startObservingAdapterEvents() {
-        disposables.add(editEvents.subscribe { viewModel.requestToEdit(it) })
-        disposables.add(deleteEvents.subscribe { showDeleteConfirmationDialog(it) })
+        composite.add(editEvents.subscribe { viewModel.requestToEdit(it) })
+        composite.add(deleteEvents.subscribe { showDeleteConfirmationDialog(it) })
     }
 
     private fun startObservingUI() {
